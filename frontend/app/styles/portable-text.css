@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+/* Portable Text - Typography with proper vertical rhythm */
+.portable-text {
+  @apply leading-relaxed text-base;
+}
+
+/* Headings - Consistent spacing and hierarchy */
+.portable-text h1 {
+  @apply text-4xl sm:text-5xl font-bold tracking-tight;
+  @apply mt-12 mb-6 first:mt-0;
+  @apply leading-tight;
+}
+
+.portable-text h2 {
+  @apply text-3xl sm:text-4xl font-bold tracking-tight;
+  @apply mt-10 mb-5 first:mt-0;
+  @apply leading-tight;
+}
+
+.portable-text h3 {
+  @apply text-2xl sm:text-3xl font-bold;
+  @apply mt-8 mb-4 first:mt-0;
+  @apply leading-snug;
+}
+
+.portable-text h4 {
+  @apply text-xl sm:text-2xl font-semibold;
+  @apply mt-6 mb-3 first:mt-0;
+  @apply leading-snug;
+}
+
+.portable-text h5 {
+  @apply text-lg sm:text-xl font-semibold;
+  @apply mt-6 mb-3 first:mt-0;
+}
+
+.portable-text h6 {
+  @apply text-base sm:text-lg font-semibold;
+  @apply mt-6 mb-3 first:mt-0;
+}
+
+/* Paragraphs - Proper spacing for readability */
+.portable-text p {
+  @apply mb-4 last:mb-0;
+}
+
+/* Lists - Better spacing and indentation */
+.portable-text ul,
+.portable-text ol {
+  @apply mb-5 last:mb-0;
+  @apply pl-6 space-y-2;
+}
+
+.portable-text ul {
+  @apply list-disc -mt-1;
+}
+
+.portable-text ol {
+  @apply list-decimal -mt-1;
+}
+
+.portable-text li {
+  @apply pl-1;
+}
+
+.portable-text li > ul,
+.portable-text li > ol {
+  @apply mt-2 mb-0;
+}
+
+/* Blockquotes - Distinctive styling */
+.portable-text blockquote {
+  @apply my-6 px-6 py-4;
+  @apply border-l-4 border-gray-300 ;
+  @apply bg-gray-50 ;
+  @apply italic text-lg;
+  @apply rounded-r-md;
+}
+
+.portable-text blockquote p:last-child {
+  @apply mb-0;
+}
+
+/* Links - Clear and accessible */
+.portable-text a {
+  @apply text-blue-600 dark:text-blue-400;
+  @apply underline decoration-blue-600/30 dark:decoration-blue-400/30;
+  @apply hover:decoration-blue-600 dark:hover:decoration-blue-400;
+  @apply transition-colors;
+}
+
+/* Superscript and Subscript */
+.portable-text sup {
+  @apply relative text-[0.75em] align-baseline;
+  top: -0.5em;
+}
+
+.portable-text sub {
+  @apply relative text-[0.75em] align-baseline;
+  bottom: -0.25em;
+}
+
+/* Images - Responsive with proper spacing */
+.portable-text img {
+  @apply rounded-md;
+  @apply w-full h-auto mb-1;
+}
+
+.portable-text-image-wrapper {
+  @apply my-6;
+  @apply w-full;
+}
+
+.portable-text-image-caption {
+  @apply mt-4 text-sm text-gray-500;
+}
+
+/* Strong and Emphasis */
+.portable-text strong {
+  @apply font-semibold;
+}
+
+.portable-text em {
+  @apply italic;
+}
+
+/* Horizontal Rule */
+.portable-text hr {
+  @apply my-8 border-gray-300 dark:border-gray-700;
+}
