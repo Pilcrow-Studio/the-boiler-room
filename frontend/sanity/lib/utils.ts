@@ -72,6 +72,8 @@ export function linkResolver(link: Link | undefined | any) {
   switch (link.linkType) {
     case 'href':
       return link.href || null
+    case 'mailto':
+      return link.email ? `mailto:${link.email}` : null
     case 'page':
       // After GROQ query projection, page is a string (slug.current), not a reference object
       const pageSlug = link?.page as string | undefined

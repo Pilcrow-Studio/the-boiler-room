@@ -34,7 +34,7 @@
 }
 
 html {
-  @apply text-black bg-white dark:text-white dark:bg-black;
+  @apply bg-[#24273a] text-white;
 }
 
 .page-wrapper {

@@ -20,7 +20,7 @@ import {assist} from '@sanity/assist'
 import Icon from './Icon'
 
 // Environment variables for project configuration
-const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'your-projectID'
+const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'rkwqq9e7'
 const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
 
 // URL for preview functionality, defaults to localhost:3000 if not set
@@ -49,7 +49,7 @@ function resolveHref(documentType?: string, slug?: string): string | undefined {
 // Main Sanity configuration
 export default defineConfig({
   name: 'default',
-  title: 'Sanity + Next.js Starter Template',
+  title: 'The Boiler Room',
   icon: Icon,
 
   projectId,
@@ -144,7 +144,6 @@ export default defineConfig({
     media(),
     unsplashImageAsset(),
     assist(),
-    visionTool(),
   ],
   form: {
     // Don't use this plugin when selecting files only (but allow all other enabled asset sources)

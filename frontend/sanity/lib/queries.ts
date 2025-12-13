@@ -21,6 +21,14 @@ export const navigationQuery = defineQuery(`
   }
 `)
 
+export const homeHeroQuery = defineQuery(`
+  *[_type == "homeHero"][0]{
+    _id,
+    heading,
+    content
+  }
+`)
+
 export const footerQuery = defineQuery(`
   *[_type == "footer"][0]{
     _id,
@@ -87,6 +95,11 @@ export const homeQuery = defineQuery(`
       _type == "fullWidthImage" => {
         _key,
         image
+      },
+      _type == "homeHero" => {
+        _key,
+        heading,
+        content
       }
     }
   }

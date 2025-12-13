@@ -68,6 +68,7 @@ export const blockContent = defineType({
                 options: {
                   list: [
                     {title: 'URL', value: 'href'},
+                    {title: 'Email', value: 'mailto'},
                     {title: 'Page', value: 'page'},
                     {title: 'Post', value: 'post'},
                   ],
@@ -83,6 +84,22 @@ export const blockContent = defineType({
                   Rule.custom((value, context: any) => {
                     if (context.parent?.linkType === 'href' && !value) {
                       return 'URL is required when Link Type is URL'
+                    }
+                    return true
+                  }),
+              }),
+              defineField({
+                name: 'email',
+                title: 'Email Address',
+                type: 'string',
+                hidden: ({parent}) => parent?.linkType !== 'mailto',
+                validation: (Rule) =>
+                  Rule.custom((value, context: any) => {
+                    if (context.parent?.linkType === 'mailto' && !value) {
+                      return 'Email address is required when Link Type is Email'
+                    }
+                    if (context.parent?.linkType === 'mailto' && value && !value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                      return 'Please enter a valid email address'
                     }
                     return true
                   }),

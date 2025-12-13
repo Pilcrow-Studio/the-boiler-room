@@ -84,9 +84,7 @@
 
 /* Links - Clear and accessible */
 .portable-text a {
-  @apply text-blue-600 dark:text-blue-400;
-  @apply underline decoration-blue-600/30 dark:decoration-blue-400/30;
-  @apply hover:decoration-blue-600 dark:hover:decoration-blue-400;
+  @apply underline hover:opacity-60;
   @apply transition-colors;
 }
 

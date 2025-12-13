@@ -70,8 +70,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
 
     <html lang="en" className={`${inter.variable} bg-white text-black`}>
       <body>
-      <Header />
-        <div className="min-h-screen pt-(--nav-height)" suppressHydrationWarning>
+        <div className="min-h-screen flex flex-col" suppressHydrationWarning>
           {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
           <Toaster />
           {isDraftMode && (
@@ -83,9 +82,11 @@ export default async function RootLayout({children}: {children: React.ReactNode}
               </Suspense>
             </>
           )}
-          <main className="page-wrapper">{children}</main>
+          <div className="flex flex-col justify-between grow">
+            <main className="page-wrapper">{children}</main>
+            <div className="mx-auto max-w-prose h-24 w-full bg-red-500" />
+          </div>
         </div>
-        <Footer />
       </body>
       <SpeedInsights />
     </html>

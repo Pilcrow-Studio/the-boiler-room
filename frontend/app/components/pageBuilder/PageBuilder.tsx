@@ -4,6 +4,7 @@ import { SanityDocument } from 'next-sanity'
 import { useOptimistic } from 'next-sanity/hooks'
 import CallToAction from './CallToAction'
 import InfoSection from './InfoSection'
+import HomeHero from './heroes/homeHero'
 import FullWidthImage from './FullWidthImage'
 import { dataAttr } from '@/sanity/lib/utils'
 
@@ -57,6 +58,7 @@ export default function PageBuilder({ sections, pageId, pageType }: PageBuilderP
           section._type === 'callToAction' ? CallToAction :
           section._type === 'infoSection' ? InfoSection :
           section._type === 'fullWidthImage' ? FullWidthImage :
+          section._type === 'homeHero' ? HomeHero :
           null
 
         if (!Component) {

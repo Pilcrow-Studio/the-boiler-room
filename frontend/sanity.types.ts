@@ -13,12 +13,151 @@
  */
 
 // Source: schema.json
-export type CallToAction = {
-  _type: "callToAction";
-  heading: string;
-  text?: string;
-  buttonText?: string;
-  link?: Link;
+export type Footer = {
+  _id: string;
+  _type: "footer";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  logo?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  companyName: string;
+  linkColumns?: Array<{
+    title: string;
+    links?: Array<{
+      text: string;
+      page: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "page";
+      };
+      _key: string;
+    }>;
+    _key: string;
+  }>;
+  infoLinks?: Array<{
+    text: string;
+    page: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "page";
+    };
+    _key: string;
+  }>;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x: number;
+  y: number;
+  height: number;
+  width: number;
+};
+
+export type Navigation = {
+  _id: string;
+  _type: "navigation";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  logo: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  items?: Array<{
+    text: string;
+    linkType: "default" | "dropdown" | "cta";
+    page?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "page";
+    };
+    dropdownItems?: Array<{
+      text: string;
+      page: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "page";
+      };
+      _key: string;
+    }>;
+    _key: string;
+  }>;
+};
+
+export type Seo = {
+  _type: "seo";
+  title?: string;
+  description?: string;
+  hideFromSearchEngines?: boolean;
+  canonicalUrl?: string;
+  openGraph?: {
+    title?: string;
+    description?: string;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
+  };
+};
+
+export type FullWidthImage = {
+  _type: "fullWidthImage";
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
 };
 
 export type Link = {
@@ -40,42 +179,19 @@ export type Link = {
   openInNewTab?: boolean;
 };
 
+export type CallToAction = {
+  _type: "callToAction";
+  heading: string;
+  text?: string;
+  buttonText?: string;
+  link?: Link;
+};
+
 export type InfoSection = {
   _type: "infoSection";
   heading?: string;
   subheading?: string;
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      linkType?: "href" | "page" | "post";
-      href?: string;
-      page?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "page";
-      };
-      post?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "post";
-      };
-      openInNewTab?: boolean;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
+  content?: BlockContent;
 };
 
 export type BlockContent = Array<{
@@ -85,16 +201,22 @@ export type BlockContent = Array<{
     _type: "span";
     _key: string;
   }>;
-  style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+  style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote" | "paragraph";
   listItem?: "bullet" | "number";
   markDefs?: Array<{
-    linkType?: "href" | "page" | "post";
+    linkType?: "href" | "mailto" | "page" | "post";
     href?: string;
+    email?: string;
     page?: {
       _ref: string;
       _type: "reference";
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "page";
+    } | {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "home";
     };
     post?: {
       _ref: string;
@@ -109,7 +231,27 @@ export type BlockContent = Array<{
   level?: number;
   _type: "block";
   _key: string;
+} | {
+  asset?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+  };
+  media?: unknown;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  alt: string;
+  caption?: string;
+  _type: "image";
+  _key: string;
 }>;
+
+export type HomeHero = {
+  _type: "homeHero";
+  heading?: string;
+  content?: BlockContent;
+};
 
 export type Settings = {
   _id: string;
@@ -166,6 +308,26 @@ export type Settings = {
   };
 };
 
+export type Home = {
+  _id: string;
+  _type: "home";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  pageBuilder?: Array<{
+    _key: string;
+  } & CallToAction | {
+    _key: string;
+  } & InfoSection | {
+    _key: string;
+  } & FullWidthImage | {
+    _key: string;
+  } & HomeHero>;
+  seo?: Seo;
+};
+
 export type Page = {
   _id: string;
   _type: "page";
@@ -180,7 +342,12 @@ export type Page = {
     _key: string;
   } & CallToAction | {
     _key: string;
-  } & InfoSection>;
+  } & InfoSection | {
+    _key: string;
+  } & FullWidthImage | {
+    _key: string;
+  } & HomeHero>;
+  seo?: Seo;
 };
 
 export type Post = {
@@ -236,6 +403,12 @@ export type Person = {
     alt?: string;
     _type: "image";
   };
+};
+
+export type Slug = {
+  _type: "slug";
+  current: string;
+  source?: string;
 };
 
 export type SanityAssistInstructionTask = {
@@ -359,6 +532,15 @@ export type SanityAssistSchemaTypeField = {
   } & SanityAssistInstruction>;
 };
 
+export type MediaTag = {
+  _id: string;
+  _type: "media.tag";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: Slug;
+};
+
 export type SanityImagePaletteSwatch = {
   _type: "sanity.imagePaletteSwatch";
   background?: string;
@@ -380,25 +562,20 @@ export type SanityImagePalette = {
 
 export type SanityImageDimensions = {
   _type: "sanity.imageDimensions";
-  height?: number;
-  width?: number;
-  aspectRatio?: number;
+  height: number;
+  width: number;
+  aspectRatio: number;
 };
 
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
+export type SanityImageMetadata = {
+  _type: "sanity.imageMetadata";
+  location?: Geopoint;
+  dimensions?: SanityImageDimensions;
+  palette?: SanityImagePalette;
+  lqip?: string;
+  blurHash?: string;
+  hasAlpha?: boolean;
+  isOpaque?: boolean;
 };
 
 export type SanityFileAsset = {
@@ -421,6 +598,13 @@ export type SanityFileAsset = {
   path?: string;
   url?: string;
   source?: SanityAssetSourceData;
+};
+
+export type SanityAssetSourceData = {
+  _type: "sanity.assetSourceData";
+  name?: string;
+  id?: string;
+  url?: string;
 };
 
 export type SanityImageAsset = {
@@ -446,17 +630,6 @@ export type SanityImageAsset = {
   source?: SanityAssetSourceData;
 };
 
-export type SanityImageMetadata = {
-  _type: "sanity.imageMetadata";
-  location?: Geopoint;
-  dimensions?: SanityImageDimensions;
-  palette?: SanityImagePalette;
-  lqip?: string;
-  blurHash?: string;
-  hasAlpha?: boolean;
-  isOpaque?: boolean;
-};
-
 export type Geopoint = {
   _type: "geopoint";
   lat?: number;
@@ -464,20 +637,7 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type Slug = {
-  _type: "slug";
-  current: string;
-  source?: string;
-};
-
-export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
-  name?: string;
-  id?: string;
-  url?: string;
-};
-
-export type AllSanitySchemaTypes = CallToAction | Link | InfoSection | BlockContent | Settings | Page | Post | Person | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = Footer | SanityImageCrop | SanityImageHotspot | Navigation | Seo | FullWidthImage | Link | CallToAction | InfoSection | BlockContent | HomeHero | Settings | Home | Page | Post | Person | Slug | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: settingsQuery
@@ -538,23 +698,81 @@ export type SettingsQueryResult = {
 } | null;
 // Variable: navigationQuery
 // Query: *[_type == "navigation"][0]{    _id,    logo {      asset,      alt    },    items[] {      text,      linkType,      "slug": page->slug.current,      dropdownItems[] {        text,        "slug": page->slug.current      }    }  }
-export type NavigationQueryResult = null;
+export type NavigationQueryResult = {
+  _id: string;
+  logo: {
+    asset: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    } | null;
+    alt: string | null;
+  };
+  items: Array<{
+    text: string;
+    linkType: "cta" | "default" | "dropdown";
+    slug: string | null;
+    dropdownItems: Array<{
+      text: string;
+      slug: string;
+    }> | null;
+  }> | null;
+} | null;
+// Variable: homeHeroQuery
+// Query: *[_type == "homeHero"][0]{    _id,    heading,    content  }
+export type HomeHeroQueryResult = null;
 // Variable: footerQuery
 // Query: *[_type == "footer"][0]{    _id,    logo {      asset,      alt    },    companyName,    linkColumns[] {      title,      links[] {        text,        "slug": page->slug.current      }    },    infoLinks[] {      text,      "slug": page->slug.current    }  }
-export type FooterQueryResult = null;
-// Variable: homeQuery
-// Query: *[_type == "home"][0]{    _id,    title,    slug,    seo {      title,      description,      hideFromSearchEngines,      canonicalUrl,      openGraph {        title,        description,        image {          asset,          alt        }      }    },    "pageBuilder": pageBuilder[]{      _key,      _type,      _type == "callToAction" => {        _key,        heading,        text,        buttonText,        link {          ...,          _type == "link" => {            "page": page->slug.current,            "post": post->slug.current          }        }      },      _type == "infoSection" => {        _key,        heading,        subheading,        content      },      _type == "fullWidthImage" => {        _key,        image      }    }  }
-export type HomeQueryResult = null;
-// Variable: getPageQuery
-// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,    seo,    "pageBuilder": pageBuilder[]{      _key,      _type,      _type == "callToAction" => {        _key,        heading,        text,        buttonText,          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      },      },      _type == "infoSection" => {        _key,        heading,        subheading,        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },      _type == "fullWidthImage" => {        _key,        image      }    },  }
-export type GetPageQueryResult = {
+export type FooterQueryResult = {
   _id: string;
-  _type: "page";
-  name: string;
-  slug: Slug;
-  heading: string;
-  subheading: string | null;
-  seo: null;
+  logo: {
+    asset: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    } | null;
+    alt: string | null;
+  } | null;
+  companyName: string;
+  linkColumns: Array<{
+    title: string;
+    links: Array<{
+      text: string;
+      slug: string;
+    }> | null;
+  }> | null;
+  infoLinks: Array<{
+    text: string;
+    slug: string;
+  }> | null;
+} | null;
+// Variable: homeQuery
+// Query: *[_type == "home"][0]{    _id,    title,    slug,    seo {      title,      description,      hideFromSearchEngines,      canonicalUrl,      openGraph {        title,        description,        image {          asset,          alt        }      }    },    "pageBuilder": pageBuilder[]{      _key,      _type,      _type == "callToAction" => {        _key,        heading,        text,        buttonText,        link {          ...,          _type == "link" => {            "page": page->slug.current,            "post": post->slug.current          }        }      },      _type == "infoSection" => {        _key,        heading,        subheading,        content      },      _type == "fullWidthImage" => {        _key,        image      },      _type == "homeHero" => {        _key,        heading,        content      }    }  }
+export type HomeQueryResult = {
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    hideFromSearchEngines: boolean | null;
+    canonicalUrl: string | null;
+    openGraph: {
+      title: string | null;
+      description: string | null;
+      image: {
+        asset: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        } | null;
+        alt: string | null;
+      } | null;
+    } | null;
+  } | null;
   pageBuilder: Array<{
     _key: string;
     _type: "callToAction";
@@ -571,6 +789,78 @@ export type GetPageQueryResult = {
     } | null;
   } | {
     _key: string;
+    _type: "fullWidthImage";
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    } | null;
+  } | {
+    _key: string;
+    _type: "homeHero";
+    heading: string | null;
+    content: BlockContent | null;
+  } | {
+    _key: string;
+    _type: "infoSection";
+    heading: string | null;
+    subheading: string | null;
+    content: BlockContent | null;
+  }> | null;
+} | null;
+// Variable: getPageQuery
+// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,    seo,    "pageBuilder": pageBuilder[]{      _key,      _type,      _type == "callToAction" => {        _key,        heading,        text,        buttonText,          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      },      },      _type == "infoSection" => {        _key,        heading,        subheading,        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },      _type == "fullWidthImage" => {        _key,        image      }    },  }
+export type GetPageQueryResult = {
+  _id: string;
+  _type: "page";
+  name: string;
+  slug: Slug;
+  heading: string;
+  subheading: string | null;
+  seo: Seo | null;
+  pageBuilder: Array<{
+    _key: string;
+    _type: "callToAction";
+    heading: string;
+    text: string | null;
+    buttonText: string | null;
+    link: {
+      _type: "link";
+      linkType?: "href" | "page" | "post";
+      href?: string;
+      page: string | null;
+      post: string | null;
+      openInNewTab?: boolean;
+    } | null;
+  } | {
+    _key: string;
+    _type: "fullWidthImage";
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    } | null;
+  } | {
+    _key: string;
+    _type: "homeHero";
+  } | {
+    _key: string;
     _type: "infoSection";
     heading: string | null;
     subheading: string | null;
@@ -581,11 +871,12 @@ export type GetPageQueryResult = {
         _type: "span";
         _key: string;
       }>;
-      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal" | "paragraph";
       listItem?: "bullet" | "number";
       markDefs: Array<{
-        linkType?: "href" | "page" | "post";
+        linkType?: "href" | "mailto" | "page" | "post";
         href?: string;
+        email?: string;
         page: string | null;
         post: string | null;
         openInNewTab?: boolean;
@@ -595,6 +886,21 @@ export type GetPageQueryResult = {
       level?: number;
       _type: "block";
       _key: string;
+    } | {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      caption?: string;
+      _type: "image";
+      _key: string;
+      markDefs: null;
     }> | null;
   }> | null;
 } | null;
@@ -699,11 +1005,12 @@ export type PostQueryResult = {
       _type: "span";
       _key: string;
     }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal" | "paragraph";
     listItem?: "bullet" | "number";
     markDefs: Array<{
-      linkType?: "href" | "page" | "post";
+      linkType?: "href" | "mailto" | "page" | "post";
       href?: string;
+      email?: string;
       page: string | null;
       post: string | null;
       openInNewTab?: boolean;
@@ -713,6 +1020,21 @@ export type PostQueryResult = {
     level?: number;
     _type: "block";
     _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    caption?: string;
+    _type: "image";
+    _key: string;
+    markDefs: null;
   }> | null;
   _id: string;
   status: "draft" | "published";
@@ -768,8 +1090,9 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"settings\"][0]": SettingsQueryResult;
     "\n  *[_type == \"navigation\"][0]{\n    _id,\n    logo {\n      asset,\n      alt\n    },\n    items[] {\n      text,\n      linkType,\n      \"slug\": page->slug.current,\n      dropdownItems[] {\n        text,\n        \"slug\": page->slug.current\n      }\n    }\n  }\n": NavigationQueryResult;
+    "\n  *[_type == \"homeHero\"][0]{\n    _id,\n    heading,\n    content\n  }\n": HomeHeroQueryResult;
     "\n  *[_type == \"footer\"][0]{\n    _id,\n    logo {\n      asset,\n      alt\n    },\n    companyName,\n    linkColumns[] {\n      title,\n      links[] {\n        text,\n        \"slug\": page->slug.current\n      }\n    },\n    infoLinks[] {\n      text,\n      \"slug\": page->slug.current\n    }\n  }\n": FooterQueryResult;
-    "\n  *[_type == \"home\"][0]{\n    _id,\n    title,\n    slug,\n    seo {\n      title,\n      description,\n      hideFromSearchEngines,\n      canonicalUrl,\n      openGraph {\n        title,\n        description,\n        image {\n          asset,\n          alt\n        }\n      }\n    },\n    \"pageBuilder\": pageBuilder[]{\n      _key,\n      _type,\n      _type == \"callToAction\" => {\n        _key,\n        heading,\n        text,\n        buttonText,\n        link {\n          ...,\n          _type == \"link\" => {\n            \"page\": page->slug.current,\n            \"post\": post->slug.current\n          }\n        }\n      },\n      _type == \"infoSection\" => {\n        _key,\n        heading,\n        subheading,\n        content\n      },\n      _type == \"fullWidthImage\" => {\n        _key,\n        image\n      }\n    }\n  }\n": HomeQueryResult;
+    "\n  *[_type == \"home\"][0]{\n    _id,\n    title,\n    slug,\n    seo {\n      title,\n      description,\n      hideFromSearchEngines,\n      canonicalUrl,\n      openGraph {\n        title,\n        description,\n        image {\n          asset,\n          alt\n        }\n      }\n    },\n    \"pageBuilder\": pageBuilder[]{\n      _key,\n      _type,\n      _type == \"callToAction\" => {\n        _key,\n        heading,\n        text,\n        buttonText,\n        link {\n          ...,\n          _type == \"link\" => {\n            \"page\": page->slug.current,\n            \"post\": post->slug.current\n          }\n        }\n      },\n      _type == \"infoSection\" => {\n        _key,\n        heading,\n        subheading,\n        content\n      },\n      _type == \"fullWidthImage\" => {\n        _key,\n        image\n      },\n      _type == \"homeHero\" => {\n        _key,\n        heading,\n        content\n      }\n    }\n  }\n": HomeQueryResult;
     "\n  *[_type == 'page' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    seo,\n    \"pageBuilder\": pageBuilder[]{\n      _key,\n      _type,\n      _type == \"callToAction\" => {\n        _key,\n        heading,\n        text,\n        buttonText,\n        \n  link {\n      ...,\n      \n  _type == \"link\" => {\n    \"page\": page->slug.current,\n    \"post\": post->slug.current\n  }\n\n      }\n,\n      },\n      _type == \"infoSection\" => {\n        _key,\n        heading,\n        subheading,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == \"link\" => {\n    \"page\": page->slug.current,\n    \"post\": post->slug.current\n  }\n\n          }\n        }\n      },\n      _type == \"fullWidthImage\" => {\n        _key,\n        image\n      }\n    },\n  }\n": GetPageQueryResult;
     "\n  *[_type == \"page\" || _type == \"post\" && defined(slug.current)] | order(_type asc) {\n    \"slug\": slug.current,\n    _type,\n    _updatedAt,\n  }\n": SitemapDataResult;
     "\n  *[_type == \"post\" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n  \"title\": coalesce(title, \"Untitled\"),\n  \"slug\": slug.current,\n  excerpt,\n  coverImage,\n  \"date\": coalesce(date, _updatedAt),\n  \"author\": author->{firstName, lastName, picture},\n\n  }\n": AllPostsQueryResult;

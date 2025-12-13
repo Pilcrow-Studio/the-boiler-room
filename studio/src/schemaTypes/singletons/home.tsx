@@ -49,7 +49,7 @@ export const home = defineType({
         name: 'pageBuilder',
         title: 'Page builder',
         type: 'array',
-        of: [{type: 'callToAction'}, {type: 'infoSection'}, {type: 'fullWidthImage'}],
+        of: [{type: 'callToAction'}, {type: 'infoSection'}, {type: 'fullWidthImage'}, {type: 'homeHero'}],
         group: 'content',
         options: {
           insertMenu: {
