@@ -51,8 +51,7 @@ export default defineConfig({
   name: 'default',
   title: 'The Boiler Room',
   icon: Icon,
-
-  projectId,
+  projectId: projectId || '',
   dataset,
 
   plugins: [
