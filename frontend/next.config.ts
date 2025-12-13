@@ -6,9 +6,6 @@ const nextConfig: NextConfig = {
     SC_DISABLE_SPEEDY: 'false',
   },
   
-  experimental: {
-    viewTransition: true,
-  },
   images: {
     remotePatterns: [
       {
