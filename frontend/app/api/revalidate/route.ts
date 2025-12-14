@@ -33,43 +33,54 @@ export async function POST(req: NextRequest) {
     }
 
     // Revalidate based on document type
+    const revalidatedPaths: string[] = []
+
     switch (body._type) {
       case 'post':
         // Revalidate the specific post page
         if (body.slug?.current) {
           revalidatePath(`/posts/${body.slug.current}`)
+          revalidatedPaths.push(`/posts/${body.slug.current}`)
         }
         // Revalidate the home page (if it shows recent posts)
-        revalidatePath('/')
+        revalidatePath('/', 'page')
+        revalidatedPaths.push('/')
         break
 
       case 'page':
         // Revalidate the specific page
         if (body.slug?.current) {
-          revalidatePath(`/${body.slug.current}`)
+          revalidatePath(`/${body.slug.current}`, 'page')
+          revalidatedPaths.push(`/${body.slug.current}`)
         }
         break
 
       case 'home':
         // Revalidate the home page
-        revalidatePath('/')
+        revalidatePath('/', 'page')
+        revalidatedPaths.push('/')
         break
 
       case 'settings':
         // Settings affect all pages, revalidate everything
         revalidatePath('/', 'layout')
+        revalidatedPaths.push('/ (layout)')
         break
 
       default:
         // For any other content type, revalidate the home page
-        revalidatePath('/')
+        revalidatePath('/', 'page')
+        revalidatedPaths.push('/')
     }
+
+    console.log('Revalidated paths:', revalidatedPaths)
 
     return NextResponse.json({
       status: 200,
       revalidated: true,
       now: Date.now(),
       body,
+      paths: revalidatedPaths,
     })
   } catch (err: unknown) {
     console.error('Error in revalidate webhook:', err)

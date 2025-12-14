@@ -37,10 +37,10 @@ export async function sanityFetch<T = any>({
 
   const data = await client.fetch<T>(query, params, {
     perspective: finalPerspective,
-    useCdn: perspective === 'published' || !isDraftMode, // Use CDN for published content
+    useCdn: false, // Disable CDN to ensure fresh data after revalidation
     stega: stega !== false && isDraftMode, // Enable stega only in draft mode unless explicitly disabled
     next: {
-      revalidate: isDraftMode ? 0 : undefined, // No cache in draft mode
+      revalidate: isDraftMode ? 0 : false, // No cache in draft mode, on-demand revalidation in production
     },
   })
 

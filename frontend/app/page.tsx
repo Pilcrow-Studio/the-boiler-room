@@ -4,8 +4,8 @@ import {homeQuery} from '@/sanity/lib/queries'
 import {sanityFetch} from '@/sanity/lib/live'
 import {generateMetadataFromSeo} from '@/sanity/lib/utils'
 
-// Revalidate every hour (3600 seconds)
-export const revalidate = 3600
+// Use on-demand revalidation via webhook instead of time-based
+export const revalidate = false
 
 // Temporary type until home document is published in Sanity
 type HomeData = {
