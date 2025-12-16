@@ -73,7 +73,7 @@ export default async function Page(props: Props) {
           </div>
         </div>
       </div>
-      <PageBuilderPage sections={page.pageBuilder} pageId={page._id} pageType="page" />
+      <PageBuilderPage sections={page.pageBuilder ?? undefined} pageId={page._id} pageType="page" />
     </div>
   )
 }
