@@ -25,7 +25,7 @@ type Navigation = {
 }
 
 export default async function Header() {
-  const {data: navigation} = await sanityFetch<Navigation | null>({
+  const {data: navigation} = await sanityFetch<Navigation>({
     query: navigationQuery,
   })
 
