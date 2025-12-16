@@ -24,7 +24,7 @@ type Footer = {
 }
 
 export default async function Footer() {
-  const {data: footer} = await sanityFetch<Footer>({
+  const {data: footer} = await sanityFetch({
     query: footerQuery,
   })
 

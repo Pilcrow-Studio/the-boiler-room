@@ -23,6 +23,9 @@ importers:
       '@portabletext/react':
         specifier: ^5.0.0
         version: 5.0.0(react@19.2.3)
+      '@prettier/plugin-oxc':
+        specifier: ^0.1.3
+        version: 0.1.3
       '@sanity/asset-utils':
         specifier: ^2.3.0
         version: 2.3.0
