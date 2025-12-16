@@ -1,53 +1,16 @@
-import {draftMode} from 'next/headers'
+import {defineLive} from 'next-sanity/live'
 import {client} from './client'
+import {token} from './token'
 
 /**
- * Regular sanityFetch without live preview to reduce serverless function costs
- * Draft mode is still supported for content editors
+ * Use defineLive to enable automatic revalidation and refreshing of your fetched content
+ * Learn more: https://github.com/sanity-io/next-sanity?tab=readme-ov-file#1-configure-definelive
  */
 
-type SanityFetchParams = {
-  query: string
-  params?: Record<string, any>
-  stega?: boolean
-  perspective?: 'published' | 'drafts'
-}
-
-export async function sanityFetch<T = any>({
-  query,
-  params = {},
-  stega,
-  perspective,
-}: SanityFetchParams): Promise<{data: T}> {
-  // Only check draft mode if we're in a request context (not during static generation)
-  // If perspective is explicitly set, respect it without checking draftMode
-  let isDraftMode = false
-  let finalPerspective = perspective || 'published'
-
-  if (!perspective) {
-    try {
-      const draft = await draftMode()
-      isDraftMode = draft.isEnabled
-      finalPerspective = isDraftMode ? 'drafts' : 'published'
-    } catch {
-      // We're in a static context (like generateStaticParams), use published perspective
-      finalPerspective = 'published'
-    }
-  }
-
-  const data = await client.fetch<T>(query, params, {
-    perspective: finalPerspective,
-    useCdn: false, // Disable CDN to ensure fresh data after revalidation
-    stega: stega !== false && isDraftMode, // Enable stega only in draft mode unless explicitly disabled
-    next: {
-      revalidate: isDraftMode ? 0 : false, // No cache in draft mode, on-demand revalidation in production
-    },
-  })
-
-  return {data}
-}
-
-// Dummy component for backwards compatibility (no longer needed)
-export function SanityLive() {
-  return null
-}
+export const {sanityFetch, SanityLive} = defineLive({
+  client,
+  // Required for showing draft content when the Sanity Presentation Tool is used, or to enable the Vercel Toolbar Edit Mode
+  serverToken: token,
+  // Required for stand-alone live previews, the token is only shared to the browser if it's a valid Next.js Draft Mode session
+  browserToken: token,
+})

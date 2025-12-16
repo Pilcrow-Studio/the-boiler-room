@@ -4,17 +4,19 @@ import {SpeedInsights} from '@vercel/speed-insights/next'
 import type {Metadata, Viewport} from 'next'
 import {Inter} from 'next/font/google'
 import {draftMode} from 'next/headers'
-import { toPlainText} from 'next-sanity'
-import { VisualEditing } from 'next-sanity/visual-editing'
+import {toPlainText} from 'next-sanity'
+import {VisualEditing} from 'next-sanity/visual-editing'
 import {Suspense} from 'react'
 import {Toaster} from 'sonner'
 import DraftModeToast from '@/app/components/utils/DraftModeToast'
+import VisualEditingWrapper from '@/app/components/utils/VisualEditingWrapper'
 import Footer from '@/app/components/global/Footer'
 import Header from '@/app/components/global/Header'
 import * as demo from '@/sanity/lib/demo'
-import {sanityFetch} from '@/sanity/lib/live'
+import {sanityFetch, SanityLive} from '@/sanity/lib/live'
 import {settingsQuery} from '@/sanity/lib/queries'
 import {resolveOpenGraphImage} from '@/sanity/lib/utils'
+import {handleError} from './client-utils'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -67,7 +69,6 @@ export default async function RootLayout({children}: {children: React.ReactNode}
   const {isEnabled: isDraftMode} = await draftMode()
 
   return (
-
     <html lang="en" className={`${inter.variable} bg-white text-black`}>
       <body>
         <div className="min-h-screen flex flex-col" suppressHydrationWarning>
@@ -76,12 +77,10 @@ export default async function RootLayout({children}: {children: React.ReactNode}
           {isDraftMode && (
             <>
               <DraftModeToast />
-              {/*  Enable Visual Editing, only to be rendered when Draft Mode is enabled */}
-              <Suspense fallback={null}>
-                <VisualEditing />
-              </Suspense>
+              <VisualEditing />
             </>
           )}
+          <SanityLive onError={handleError} />
           <div className="flex flex-col justify-between grow">
             <main className="page-wrapper">{children}</main>
             <div className="mx-auto max-w-prose h-24 w-full bg-red-500" />
