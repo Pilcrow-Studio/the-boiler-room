@@ -4,17 +4,17 @@ import {useEffect, useState} from 'react'
 import Link from 'next/link'
 
 type NavigationItem = {
-  text?: string
-  slug?: string
-  linkType?: 'default' | 'dropdown' | 'cta'
+  text?: string | null
+  slug?: string | null
+  linkType?: 'default' | 'dropdown' | 'cta' | null
   dropdownItems?: Array<{
-    text?: string
-    slug?: string
-  }>
+    text?: string | null
+    slug?: string | null
+  }> | null
 }
 
 type MobileMenuProps = {
-  items: NavigationItem[]
+  items?: NavigationItem[]
 }
 
 export default function MobileMenu({items}: MobileMenuProps) {
@@ -59,7 +59,7 @@ export default function MobileMenu({items}: MobileMenuProps) {
                     Home
                   </Link>
                 </li>
-                {items.map((item, index) => {
+                {items?.map((item, index) => {
                   const linkType = item.linkType || 'default'
 
                   // For dropdown items - show parent and sub-items

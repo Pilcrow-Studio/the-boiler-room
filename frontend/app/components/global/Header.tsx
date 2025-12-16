@@ -6,20 +6,20 @@ import MobileMenu from './MobileMenu'
 import { ChevronDown } from 'lucide-react'
 
 type NavigationItem = {
-  text?: string
-  slug?: string
-  linkType?: 'default' | 'dropdown' | 'cta'
+  text?: string | null
+  slug?: string | null
+  linkType?: 'default' | 'dropdown' | 'cta' | null
   dropdownItems?: Array<{
-    text?: string
-    slug?: string
-  }>
+    text?: string | null
+    slug?: string | null
+  }> | null
 }
 
 type Navigation = {
   _id: string
   logo?: {
     asset?: any
-    alt?: string
+    alt?: string | null
   }
   items?: NavigationItem[]
 }

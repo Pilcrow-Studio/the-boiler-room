@@ -7,20 +7,20 @@ type Footer = {
   _id: string
   logo?: {
     asset?: any
-    alt?: string
+    alt?: string | null
   }
-  companyName?: string
+  companyName?: string | null
   linkColumns?: Array<{
-    title?: string
+    title?: string | null
     links?: Array<{
-      text?: string
-      slug?: string
-    }>
-  }>
+      text?: string | null
+      slug?: string | null
+    }> | null
+  }> | null
   infoLinks?: Array<{
-    text?: string
-    slug?: string
-  }>
+    text?: string | null
+    slug?: string | null
+  }> | null
 }
 
 export default async function Footer() {
