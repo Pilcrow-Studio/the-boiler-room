@@ -5,7 +5,7 @@ import {urlForImage} from '@/sanity/lib/utils'
 export interface ResponsiveImageProps {
   image: {
     asset?: any
-    alt?: string
+    alt?: string | null
     hotspot?: {x: number; y: number; height: number; width: number}
     crop?: {top: number; bottom: number; left: number; right: number}
     metadata?: {lqip?: string}
@@ -22,7 +22,7 @@ export interface ResponsiveImageProps {
   baseWidth?: number
   aspectRatio?: number
   fit?: 'max' | 'crop' | 'clip' | 'fill' | 'min' | 'scale'
-  
+
 }
 
 export default function ResponsiveImage({
