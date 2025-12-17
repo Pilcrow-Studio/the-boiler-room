@@ -12,6 +12,8 @@
   --color-framework: #000;
   --color-black: #0b0b0b;
   --color-white: #fff;
+  --color-primary: #1262FC;
+  --color-secondary: #F4F2EC;
   --color-brand: #f50;
   --color-blue: #0052ff;
   --color-yellow: #cdea19;
@@ -27,23 +29,13 @@
   --color-gray-900: #1b1d27;
   --color-gray-950: #13141b;
   --nav-height: 64px;
-  --font-display: 'Inter', 'sans-serif';
-  --font-sans: 'Inter', 'sans-serif';
+  --font-display: 'Geist', 'sans-serif';
+  --font-sans: 'Geist', 'sans-serif';
 
   --default-transition-duration: 250ms;
 }
 
 html {
-  @apply bg-[#24273a] text-white;
-}
-
-.page-wrapper {
-  transition-property: opacity;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 200ms;
-  will-change: opacity;
-}
-
-.page-transition {
-  opacity: 0;
+  @apply bg-secondary text-primary;
+  @apply font-sans;
 }

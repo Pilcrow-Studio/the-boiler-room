@@ -2,7 +2,7 @@ import './styles/globals.css'
 
 import {SpeedInsights} from '@vercel/speed-insights/next'
 import type {Metadata, Viewport} from 'next'
-import {Inter} from 'next/font/google'
+import {Geist} from 'next/font/google'
 import {draftMode} from 'next/headers'
 import {toPlainText} from 'next-sanity'
 import {VisualEditing} from 'next-sanity/visual-editing'
@@ -57,8 +57,8 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-const inter = Inter({
-  variable: '--font-inter',
+const geist = Geist({
+  variable: '--font-geist',
   subsets: ['latin'],
   display: 'swap',
 })
@@ -67,7 +67,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
   const {isEnabled: isDraftMode} = await draftMode()
 
   return (
-    <html lang="en" className={`${inter.variable} bg-white text-black`}>
+    <html lang="en" className={`${geist.variable} bg-white text-black`}>
       <body>
         <div className="min-h-screen flex flex-col" suppressHydrationWarning={true}>
           {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}

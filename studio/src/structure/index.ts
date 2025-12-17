@@ -18,32 +18,4 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
         .title('Home')
         .child(S.document().schemaType('home').documentId('home'))
         .icon(HomeIcon),
-      ...S.documentTypeListItems()
-        // Remove the "assist.instruction.context" and "settings" content  from the list of content types
-        .filter((listItem: any) => !DISABLED_TYPES.includes(listItem.getId()))
-        // Pluralize the title of each document type.  This is not required but just an option to consider.
-        .map((listItem) => {
-          return listItem.title(pluralize(listItem.getTitle() as string))
-        }),
-        S.listItem()
-        .title('Global Components')
-        .icon(ComponentIcon)
-        .child(S.list()
-          .title('Global Components')
-          .items([
-            S.listItem()
-              .title('Navigation')
-              .child(S.document().schemaType('navigation').documentId('navigation'))
-              .icon(MenuIcon),
-            S.listItem()
-              .title('Footer')
-              .child(S.document().schemaType('footer').documentId('footer'))
-              .icon(SquareIcon),
-          ]),
-        ),
-      // Settings Singleton in order to view/edit the one particular document for Settings.  Learn more about Singletons: https://www.sanity.io/docs/create-a-link-to-a-single-edit-page-in-your-main-document-type-list
-      S.listItem()
-        .title('Site Settings')
-        .child(S.document().schemaType('settings').documentId('siteSettings'))
-        .icon(CogIcon),
-    ])
+      ])
