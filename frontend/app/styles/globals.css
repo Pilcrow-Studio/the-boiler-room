@@ -38,4 +38,5 @@
 html {
   @apply bg-secondary text-primary;
   @apply font-sans;
+  @apply selection:bg-primary selection:text-white;
 }
