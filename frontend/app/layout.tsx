@@ -33,7 +33,6 @@ export async function generateMetadata(): Promise<Metadata> {
     stega: false,
   })
   const title = settings?.title || demo.title
-  const description = settings?.description || demo.description
 
   const ogImage = resolveOpenGraphImage(settings?.ogImage)
   let metadataBase: URL | undefined = undefined
@@ -50,7 +49,6 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${title}`,
       default: title,
     },
-    description: toPlainText(description),
     openGraph: {
       images: ogImage ? [ogImage] : [],
     },
