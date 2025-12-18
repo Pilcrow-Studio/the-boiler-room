@@ -92,12 +92,10 @@ export default defineConfig({
             tone: 'positive',
           }),
           navigation: defineLocations({
-            
             message: 'This document is used on all pages',
             tone: 'positive',
           }),
           footer: defineLocations({
-            
             message: 'This document is used on all pages',
             tone: 'positive',
           }),

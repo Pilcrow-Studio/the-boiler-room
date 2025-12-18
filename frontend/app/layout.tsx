@@ -15,7 +15,7 @@ import {sanityFetch, SanityLive} from '@/sanity/lib/live'
 import {settingsQuery} from '@/sanity/lib/queries'
 import {resolveOpenGraphImage} from '@/sanity/lib/utils'
 import {handleError} from './client-utils'
-
+import ClickEmboss from '@/app/components/interactive/clickEmboss'
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
@@ -79,10 +79,10 @@ export default async function RootLayout({children}: {children: React.ReactNode}
             </>
           )}
           <SanityLive onError={handleError} />
-          <div className="flex flex-col justify-between grow">
+          <div className="flex flex-col justify-between grow z-10">
             <main className="page-wrapper">{children}</main>
-            <div className="mx-auto max-w-prose h-24 w-full bg-red-500" />
           </div>
+          <ClickEmboss />
         </div>
       </body>
       <SpeedInsights />
