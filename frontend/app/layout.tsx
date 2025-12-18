@@ -71,10 +71,10 @@ export default async function RootLayout({children}: {children: React.ReactNode}
       <body>
         <div className="min-h-screen flex flex-col" suppressHydrationWarning={true}>
           {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
-          {/* <Toaster /> */}
+          <Toaster />
           {isDraftMode && (
             <>
-              {/* <DraftModeToast /> */}
+              <DraftModeToast />
               <VisualEditing />
             </>
           )}

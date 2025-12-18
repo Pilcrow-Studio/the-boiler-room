@@ -8,11 +8,6 @@ export const homeHero = defineType({
   icon: HomeIcon,
   fields: [
     defineField({
-      name: 'heading',
-      title: 'Heading',
-      type: 'string',
-    }),
-    defineField({
       name: 'content',
       title: 'Content',
       type: 'blockContent',
@@ -20,10 +15,10 @@ export const homeHero = defineType({
   ],
   preview: {
     select: {
-      title: 'heading',
+      content: 'content',
     },
     prepare(selection) {
-      return {title: selection.title, subtitle: 'Home Hero'}
+      return {title: 'Home Hero', subtitle: selection.content?.[0]?.children?.[0]?.text}
     },
   },
 })

@@ -15,6 +15,14 @@ export const settings = defineType({
   icon: CogIcon,
   fields: [
     defineField({
+      name: 'logo',
+      title: 'Logo',
+      type: 'image',
+      fields: [
+        {name: 'alt', type: 'string', title: 'Alternative Text'},
+      ],
+    }),
+    defineField({
       name: 'title',
       description: 'This field is the title of your blog.',
       title: 'Title',

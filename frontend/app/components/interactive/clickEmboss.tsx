@@ -64,6 +64,7 @@ export default function ClickEmboss() {
 
       // Create container div for the SVG
       const shapeContainer = document.createElement('div')
+      shapeContainer.className = 'bg-secondary rounded-full'
       shapeContainer.style.position = 'fixed'
       shapeContainer.style.left = `${x - 50}px` // Center the 40px shape
       shapeContainer.style.top = `${y - 50}px`

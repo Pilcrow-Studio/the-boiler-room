@@ -18,4 +18,9 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
         .title('Home')
         .child(S.document().schemaType('home').documentId('home'))
         .icon(HomeIcon),
-      ])
+      S.divider(),
+      S.listItem()
+        .title('Settings')
+        .child(S.document().schemaType('settings').documentId('settings'))
+        .icon(CogIcon),
+    ])
