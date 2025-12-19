@@ -43,7 +43,8 @@
 /* Paragraphs - Proper spacing for readability */
 .portable-text p {
   @apply mb-4 last:mb-0;
-  @apply text-left md:text-justify;
+  @apply text-justify;
+  @apply lg:text-base text-sm
 }
 
 /* Lists - Better spacing and indentation */

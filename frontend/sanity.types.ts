@@ -708,60 +708,11 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol
 // Source: ./sanity/lib/queries.ts
 // Variable: settingsQuery
-// Query: *[_type == "settings"][0]
+// Query: *[_type == "settings"][0]{    _id,    logo {      asset->{        url,        extension,        mimeType      },      alt    },    title  }
 export type SettingsQueryResult = {
   _id: string
-  _type: 'settings'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
+  logo: null
   title: string
-  description?: Array<{
-    children?: Array<{
-      marks?: Array<string>
-      text?: string
-      _type: 'span'
-      _key: string
-    }>
-    style?: 'normal'
-    listItem?: never
-    markDefs?: Array<{
-      linkType?: 'href' | 'page' | 'post'
-      href?: string
-      page?: {
-        _ref: string
-        _type: 'reference'
-        _weak?: boolean
-        [internalGroqTypeReferenceTo]?: 'page'
-      }
-      post?: {
-        _ref: string
-        _type: 'reference'
-        _weak?: boolean
-        [internalGroqTypeReferenceTo]?: 'post'
-      }
-      openInNewTab?: boolean
-      _type: 'link'
-      _key: string
-    }>
-    level?: number
-    _type: 'block'
-    _key: string
-  }>
-  ogImage?: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-    }
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    alt?: string
-    metadataBase?: string
-    _type: 'image'
-  }
 } | null
 // Variable: navigationQuery
 // Query: *[_type == "navigation"][0]{    _id,    logo {      asset,      alt    },    items[] {      text,      linkType,      "slug": page->slug.current,      dropdownItems[] {        text,        "slug": page->slug.current      }    }  }
@@ -1183,7 +1134,7 @@ export type PagesSlugsResult = Array<{
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
-    '*[_type == "settings"][0]': SettingsQueryResult
+    '\n  *[_type == "settings"][0]{\n    _id,\n    logo {\n      asset->{\n        url,\n        extension,\n        mimeType\n      },\n      alt\n    },\n    title\n  }\n': SettingsQueryResult
     '\n  *[_type == "navigation"][0]{\n    _id,\n    logo {\n      asset,\n      alt\n    },\n    items[] {\n      text,\n      linkType,\n      "slug": page->slug.current,\n      dropdownItems[] {\n        text,\n        "slug": page->slug.current\n      }\n    }\n  }\n': NavigationQueryResult
     '\n  *[_type == "homeHero"][0]{\n    _id,\n    heading,\n    content\n  }\n': HomeHeroQueryResult
     '\n  *[_type == "footer"][0]{\n    _id,\n    logo {\n      asset,\n      alt\n    },\n    companyName,\n    linkColumns[] {\n      title,\n      links[] {\n        text,\n        "slug": page->slug.current\n      }\n    },\n    infoLinks[] {\n      text,\n      "slug": page->slug.current\n    }\n  }\n': FooterQueryResult
